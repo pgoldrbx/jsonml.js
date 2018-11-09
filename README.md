@@ -24,7 +24,7 @@ npm install --save @condenast/jsonml.js
 const JsonML = require('@condenast/jsonml.js');
 
 // Only import utils
-const JsonML = require('@condenast/jsonml.js/lib/utils');
+const JsonML = require('@condenast/jsonml.js/dist/utils');
 ```
 
 ## API
