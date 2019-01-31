@@ -11,6 +11,10 @@ Forked from [benjycui/jsonml.js](https://github.com/benjycui/jsonml.js) since it
 
 We are extremely grateful for the [original work](https://github.com/mckamey/jsonml) Stephen M. McKamey, and the adaptation for node by [benjycui](https://github.com/benjycui).
 
+## Maintainers
+
+- Phil Gold ([@pgoldrbx](https://github.com/pgoldrbx) / phil_gold@condenast.com)
+
 ## Install
 
 ```sh
