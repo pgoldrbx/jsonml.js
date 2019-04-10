@@ -2,10 +2,11 @@
   "name": "@condenast/jsonml.js",
   "version": "1.0.1",
   "description": "JsonML-related tools.",
-  "main": "dist/index.js",
+  "main": "index.js",
   "files": [
     "*.md",
-    "dist"
+    "dist",
+    "index.js"
   ],
   "scripts": {
     "lint": "eslint ./lib/utils.js ./test",

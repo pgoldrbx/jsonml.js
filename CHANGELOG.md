@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Fixed
+- Add top-level index.js file to avoid issues where npm@3 can install a package missing the `main` property
+
 ## Version 1.0.1 - 2018-11-09
 ### Fixed
 - Repair build scripts to output an es5-compatible module
