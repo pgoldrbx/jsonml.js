@@ -1,40 +1,53 @@
-export interface JsonMLAttributes {
-  [key: string]: any // @TODO - can this be anything but a string? it technically SHOULD be,
-      // but I'm not sure if we want to be that strict. maybe it should be primitives at least?
-      // or maybe we just leave it alone?
+type AttributeValue = any; // this is not ideal...
+// @TODO - can this be anything but a string? it technically SHOULD be,
+// but I'm not sure if we want to be that strict. maybe it should be primitives at least?
+type AttributeValueStrict = string | number | boolean | null;
+
+export interface Attributes {
+  [key: string]: AttributeValue;
 }
 
-export type JsonMLChildNode = string | JsonMLNode;
+type TagName = string;
 
-export type JsonMLChildren = Array<JsonMLChildNode>;
-
-export interface JsonMLNode extends Array<string | JsonMLAttributes | JsonMLChildNode> {
-  0: string;
+interface ElementWithAttributes extends Array<TagName | Attributes | Element> {
+  0: TagName;
+  1: Attributes;
 }
 
-export namespace utils {
-  export function isFragment(jml: JsonMLNode): boolean;
-
-  export function getTagName(jml: JsonMLNode): string;
-
-  export function isElement(value: any): boolean;
-
-  export function isAttributes(value: any): boolean;
-
-  export function hasAttributes(jml: JsonMLNode): boolean;
-
-  export function getAttributes(jml: JsonMLNode, addIfMissing?: boolean): JsonMLAttributes;
-
-  export function addAttributes(jml: JsonMLNode, attr: JsonMLAttributes): undefined;
-
-  export function getAttribute(jml: JsonMLNode, key: string): any;
-
-  export function setAttribute(jml: JsonMLNode, key: string, value: any): undefined;
-
-  export function appendChild(jml: JsonMLNode, child: JsonMLChildNode): boolean;
-
-  export function getChildren(jml: JsonMLNode): JsonMLChildren;
+interface ElementWithoutAttributes extends Array<TagName | Element> {
+  0: TagName;
 }
+
+// see: http://www.jsonml.org/syntax/
+export type Element
+  = ElementWithAttributes
+  | ElementWithoutAttributes
+  | string;
+
+export type ElementList = Array<Element | ElementList> | Element
+
+// Utils
+export function isFragment(jml: Element): boolean;
+
+export function getTagName(jml: Element): string;
+
+export function isElement(value: any): boolean;
+
+export function isAttributes(value: any): boolean;
+
+export function hasAttributes(jml: Element): boolean;
+
+export function getAttributes(jml: Element, addIfMissing?: boolean): Attributes;
+
+export function addAttributes(jml: Element, attr: Attributes): void;
+
+export function getAttribute(jml: Element, key: string): AttributeValue | void;
+
+export function setAttribute(jml: Element, key: string, value: any): void;
+
+export function appendChild(jml: Element, child: Element): boolean;
+
+export function getChildren(jml: Element): ElementList;
 
 
 // Initial, basic type definition in lieu of adding external packages
@@ -44,34 +57,32 @@ type DOMNode = {
 };
 
 
-export namespace dom {
-  export type ElementFilterFunction = (jml: JsonMLNode, elem: DOMNode) => JsonMLNode | null;
+// DOM
+export type ElementFilterFunction = (jml: Element, elem: DOMNode) => Element | null;
 
-  export function fromHTML(elem: DOMNode, filter?: ElementFilterFunction): JsonMLNode | null;
+export function fromHTML(elem: DOMNode, filter?: ElementFilterFunction): Element | null;
 
-  export function fromHTMLText(html: string, filter?: ElementFilterFunction): JsonMLNode | null;
+export function fromHTMLText(html: string, filter?: ElementFilterFunction): Element | null;
+
+
+// HTML
+export class Markup {
+  value: string
+  toString(): string
 }
 
+export type HtmlElementFilter = (elem: DOMNode) => DOMNode
 
-export namespace html {
-  export class Markup {
-    value: string
-    toString(): string
-  }
+export type ErrorHandler = (err: Error, jml: Element, filter?: HtmlElementFilter) => any
 
-  export type HtmlElementFilter = (elem: DOMNode) => DOMNode
+export function raw(value: string): Markup;
 
-  export type ErrorHandler = (err: Error, jml: JsonMLNode, filter?: HtmlElementFilter) => any
+export function isRaw(value: any): boolean;
 
-  export function raw(value: string): Markup;
+export let onerror: null | ErrorHandler
 
-  export function isRaw(value: any): boolean;
+export function patch(elem: DOMNode, jml: Element, filter?: HtmlElementFilter): DOMNode
 
-  export let onerror: null | ErrorHandler
+export function toHTML(jml: string | Element, filter?: HtmlElementFilter): DOMNode
 
-  export function patch(elem: DOMNode, jml: JsonMLNode, filter?: HtmlElementFilter): DOMNode
-
-  export function toHTML(jml: string | JsonMLNode, filter?: HtmlElementFilter): DOMNode
-
-  export function toHTMLText(jml: string | JsonMLNode, filter?: HtmlElementFilter): string
-}
+export function toHTMLText(jml: string | Element, filter?: HtmlElementFilter): string
