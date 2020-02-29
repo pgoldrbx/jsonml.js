@@ -1,3 +1,5 @@
+// see: http://www.jsonml.org/syntax/
+
 export type AttributeValue = string | number | boolean | null;
 
 export interface Attributes {
@@ -15,7 +17,6 @@ interface ElementWithoutAttributes extends Array<TagName | Element> {
   0: TagName;
 }
 
-// see: http://www.jsonml.org/syntax/
 export type Element
   = ElementWithAttributes
   | ElementWithoutAttributes
@@ -26,7 +27,7 @@ export type ElementList = Array<Element | ElementList> | Element
 // Utils
 export function isFragment(jml: Element): boolean;
 
-export function getTagName(jml: Element): string;
+export function getTagName(jml: Element): TagName;
 
 export function isElement(value: any): boolean;
 
@@ -40,7 +41,7 @@ export function addAttributes(jml: Element, attr: Attributes): void;
 
 export function getAttribute(jml: Element, key: string): AttributeValue | void;
 
-export function setAttribute(jml: Element, key: string, value: any): void;
+export function setAttribute(jml: Element, key: string, value: AttributeValue): void;
 
 export function appendChild(jml: Element, child: Element): boolean;
 
@@ -55,11 +56,11 @@ type DOMNode = {
 
 
 // DOM
-export type ElementFilterFunction = (jml: Element, elem: DOMNode) => Element | null;
+export type ElementFilter = (jml: Element, elem: DOMNode) => Element | null;
 
-export function fromHTML(elem: DOMNode, filter?: ElementFilterFunction): Element | null;
+export function fromHTML(elem: DOMNode, filter?: ElementFilter): Element | null;
 
-export function fromHTMLText(html: string, filter?: ElementFilterFunction): Element | null;
+export function fromHTMLText(html: string, filter?: ElementFilter): Element | null;
 
 
 // HTML

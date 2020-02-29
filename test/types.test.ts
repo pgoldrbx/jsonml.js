@@ -28,8 +28,9 @@ const gotEmptyAttrs: Attributes = jsonml.getAttributes(['p'], false);
 
 const addAttributesRetval: void = jsonml.addAttributes(['p'], { foo: 'bar', a: 1 });
 
-const gotAttr: AttributeValue = jsonml.getAttribute(['p', { foo: 'bar' }], 'foo');
-const gotNoAttr: void = jsonml.getAttribute(['p', { foo: 'bar' }], 'this-does-not-exist');
+type MaybeAttributeValue = AttributeValue | void;
+const gotAttr: MaybeAttributeValue = jsonml.getAttribute(['p', { foo: 'bar' }], 'foo');
+const gotNoAttr: MaybeAttributeValue = jsonml.getAttribute(['p', { foo: 'bar' }], 'this-does-not-exist');
 
 const setAttributeRetval: void = jsonml.setAttribute(['p'], 'foo', 'bar');
 
