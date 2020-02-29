@@ -1,7 +1,4 @@
-type AttributeValue = any; // this is not ideal...
-// @TODO - can this be anything but a string? it technically SHOULD be,
-// but I'm not sure if we want to be that strict. maybe it should be primitives at least?
-type AttributeValueStrict = string | number | boolean | null;
+export type AttributeValue = string | number | boolean | null;
 
 export interface Attributes {
   [key: string]: AttributeValue;
