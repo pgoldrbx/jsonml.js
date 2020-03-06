@@ -1,7 +1,7 @@
 import {
   Attributes,
   AttributeValue,
-  ElementList,
+  Node,
 } from '..';
 
 import * as jsonml from '..';
@@ -12,6 +12,16 @@ const isFragNo: boolean = jsonml.isFragment(['div', 'hi']);
 
 const paraTag: string = jsonml.getTagName(['p', 'some text']);
 const fragTag: string = jsonml.getTagName(['', 'some fragment text']);
+
+const foo = jsonml.getTagName([
+  '', // fragment
+  { foo: 'bar' }, // attributes allowed here
+  ['p', { foo: 'bar' }, 'some fragment text'],
+  ['p', { foo: 'bar' }, 'some fragment text'],
+  ['div', 'foo'],
+  undefined,
+  'baz'
+]);
 
 const isElemYes: boolean = jsonml.isElement(['img', { href: 'https://example.com/foo.jpg' }]);
 const isElemNo: boolean = jsonml.isElement({});
@@ -36,4 +46,4 @@ const setAttributeRetval: void = jsonml.setAttribute(['p'], 'foo', 'bar');
 
 const childWasAppended: boolean = jsonml.appendChild(['p', { foo: 'bar'}], ['strong', 'Hello World', ['em', 'another'], 'bye' ]);
 
-const gotChildren: ElementList = jsonml.getChildren(['div', ['p', 'one'], ['p', 'two']]);
+const gotChildren: Node[] = jsonml.getChildren(['div', ['p', 'one'], ['p', 'two'], 'foo']);
