@@ -19,7 +19,6 @@ const foo = jsonml.getTagName([
   ['p', { foo: 'bar' }, 'some fragment text'],
   ['p', { foo: 'bar' }, 'some fragment text'],
   ['div', 'foo'],
-  undefined,
   'baz'
 ]);
 

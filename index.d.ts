@@ -6,6 +6,7 @@
 /// <reference lib="dom"/>
 
 // export type AttributeValue = string | number | boolean | null;
+// | { [key: string]: any }
 export type AttributeValue = any;
 
 export interface Attributes {
@@ -16,29 +17,11 @@ type TagName = string;
 
 type TextNode = string;
 
-type EmptyElement = [ TagName ];
-type EmptyElementWithAttributes = [ TagName, Attributes ];
-interface ElementWithChildren extends Array<TagName | JSONMLNode> {
-  0: TagName
-}
-interface ElementWithAttributesAndChildren extends Array<TagName | Attributes | JSONMLNode> {
-  0: TagName
-  1: Attributes
-}
-
-export interface JSONMLElement extends Array<TagName | Attributes | JSONMLNode | undefined> {
-  0: TagName;
-  1?: Attributes | JSONMLNode;
-  2?: JSONMLNode
-  3?: JSONMLNode;
-  4?: JSONMLNode;
-  5?: JSONMLNode;
-  6?: JSONMLNode;
-  7?: JSONMLNode;
-  8?: JSONMLNode;
-  9?: JSONMLNode;
-  // no additional type checking past position 9
-}
+export type JSONMLElement = [ TagName ]
+  | [ TagName, Attributes ]
+  | [ TagName, ...JSONMLNode[] ]
+  | [ TagName, Attributes, ...JSONMLNode[] ]
+  ;
 
 export type JSONMLNode = JSONMLElement | TextNode
 
