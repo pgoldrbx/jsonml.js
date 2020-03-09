@@ -1,4 +1,9 @@
+// JsonML
 // see: http://www.jsonml.org/syntax/
+//
+// `Node` type imported from lib.dom
+//
+/// <reference lib="dom"/>
 
 // export type AttributeValue = string | number | boolean | null;
 export type AttributeValue = any;
@@ -9,71 +14,65 @@ export interface Attributes {
 
 type TagName = string;
 
-export type TextNode = string;
+type TextNode = string;
 
 type EmptyElement = [ TagName ];
 type EmptyElementWithAttributes = [ TagName, Attributes ];
-interface ElementWithChildren extends Array<TagName | Node> {
+interface ElementWithChildren extends Array<TagName | JSONMLNode> {
   0: TagName
 }
-interface ElementWithAttributesAndChildren extends Array<TagName | Attributes | Node> {
+interface ElementWithAttributesAndChildren extends Array<TagName | Attributes | JSONMLNode> {
   0: TagName
   1: Attributes
 }
 
-export interface Element extends Array<TagName | Attributes | Node | undefined> {
+export interface JSONMLElement extends Array<TagName | Attributes | JSONMLNode | undefined> {
   0: TagName;
-  1?: Attributes | Element | string;
-  2?: Element | string;
-  3?: Element | string;
-  4?: Element | string;
-  5?: Element | string;
-  6?: Element | string;
-  7?: Element | string;
-  8?: Element | string;
-  9?: Element | string;
+  1?: Attributes | JSONMLNode;
+  2?: JSONMLNode
+  3?: JSONMLNode;
+  4?: JSONMLNode;
+  5?: JSONMLNode;
+  6?: JSONMLNode;
+  7?: JSONMLNode;
+  8?: JSONMLNode;
+  9?: JSONMLNode;
   // no additional type checking past position 9
 }
 
-export type Node = Element | TextNode
+export type JSONMLNode = JSONMLElement | TextNode
+
 
 // Utils
-export function isFragment(jml: Element): boolean;
+export function isFragment(jml: JSONMLElement): boolean;
 
-export function getTagName(jml: Element): TagName;
+export function getTagName(jml: JSONMLElement): TagName;
 
 export function isElement(value: any): boolean;
 
 export function isAttributes(value: any): boolean;
 
-export function hasAttributes(jml: Element): boolean;
+export function hasAttributes(jml: JSONMLElement): boolean;
 
-export function getAttributes(jml: Element, addIfMissing?: boolean): Attributes;
+export function getAttributes(jml: JSONMLElement, addIfMissing?: boolean): Attributes;
 
-export function addAttributes(jml: Element, attr: Attributes): void;
+export function addAttributes(jml: JSONMLElement, attr: Attributes): void;
 
-export function getAttribute(jml: Element, key: string): AttributeValue | void;
+export function getAttribute(jml: JSONMLElement, key: string): AttributeValue | void;
 
-export function setAttribute(jml: Element, key: string, value: AttributeValue): void;
+export function setAttribute(jml: JSONMLElement, key: string, value: AttributeValue): void;
 
-export function appendChild(jml: Element, child: Element): boolean;
+export function appendChild(jml: JSONMLElement, child: JSONMLElement): boolean;
 
-export function getChildren(jml: Element): Node[];
-
-
-// Initial, basic type definition in lieu of adding external packages
-type DOMNode = {
-  [key: string]: any,
-  nodeType: number
-};
+export function getChildren(jml: JSONMLElement): JSONMLNode[];
 
 
 // DOM
-export type ElementFilter = (jml: Element, elem: DOMNode) => Element | null;
+export type JSONMLElementFilter = (jml: JSONMLElement, elem: JSONMLNode) => JSONMLElement | null;
 
-export function fromHTML(elem: DOMNode, filter?: ElementFilter): Element | null;
+export function fromHTML(elem: Node, filter?: JSONMLElementFilter): JSONMLElement | null;
 
-export function fromHTMLText(html: string, filter?: ElementFilter): Element | null;
+export function fromHTMLText(html: string, filter?: JSONMLElementFilter): JSONMLElement | null;
 
 
 // HTML
@@ -82,9 +81,9 @@ export class Markup {
   toString(): string
 }
 
-export type HtmlElementFilter = (elem: DOMNode) => DOMNode
+export type HTMLElementFilter = (elem: Node) => Node
 
-export type ErrorHandler = (err: Error, jml: Element, filter?: HtmlElementFilter) => any
+export type ErrorHandler = (err: Error, jml: JSONMLElement, filter?: HTMLElementFilter) => any
 
 export function raw(value: string): Markup;
 
@@ -92,8 +91,8 @@ export function isRaw(value: any): boolean;
 
 export let onerror: null | ErrorHandler
 
-export function patch(elem: DOMNode, jml: Element, filter?: HtmlElementFilter): DOMNode
+export function patch(elem: Node, jml: JSONMLElement, filter?: HTMLElementFilter): Node
 
-export function toHTML(jml: string | Element, filter?: HtmlElementFilter): DOMNode
+export function toHTML(jml: string | JSONMLElement, filter?: HTMLElementFilter): Node
 
-export function toHTMLText(jml: string | Element, filter?: HtmlElementFilter): string
+export function toHTMLText(jml: string | JSONMLElement, filter?: HTMLElementFilter): string

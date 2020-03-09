@@ -1,7 +1,7 @@
 import {
   Attributes,
   AttributeValue,
-  Node,
+  JSONMLNode,
 } from '..';
 
 import * as jsonml from '..';
@@ -46,4 +46,4 @@ const setAttributeRetval: void = jsonml.setAttribute(['p'], 'foo', 'bar');
 
 const childWasAppended: boolean = jsonml.appendChild(['p', { foo: 'bar'}], ['strong', 'Hello World', ['em', 'another'], 'bye' ]);
 
-const gotChildren: Node[] = jsonml.getChildren(['div', ['p', 'one'], ['p', 'two'], 'foo']);
+const gotChildren: JSONMLNode[] = jsonml.getChildren(['div', ['p', 'one'], ['p', 'two'], 'foo']);
