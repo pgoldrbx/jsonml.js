@@ -5,8 +5,6 @@
 //
 /// <reference lib="dom"/>
 
-// export type AttributeValue = string | number | boolean | null;
-// | { [key: string]: any }
 export type AttributeValue = any;
 
 export interface Attributes {
