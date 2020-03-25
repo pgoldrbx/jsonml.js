@@ -13,6 +13,7 @@
     "before 5am every weekday",
     "every weekend"
   ],
+  "semanticCommits": true,
   "timezone": "America/New_York",
   "packageRules": [
     {
@@ -20,32 +21,28 @@
       "packagePatterns": ["*"],
       "depTypeList": ["devDependencies"],
       "updateTypes": ["major"],
-      "labels": ["UPDATE-MAJOR-DEV"],
-      "semanticCommits": true
+      "labels": ["UPDATE-MAJOR-DEV"]
     },
     {
       "groupName": "Non-major dev deps",
       "packagePatterns": ["*"],
       "depTypeList": ["devDependencies"],
       "updateTypes": ["minor", "patch"],
-      "labels": ["UPDATE-NON-MAJOR-DEV"],
-      "semanticCommits": true
+      "labels": ["UPDATE-NON-MAJOR-DEV"]
     },
     {
       "groupName": "Major deps",
       "packagePatterns": ["*"],
       "depTypeList": ["dependencies"],
       "updateTypes": ["major"],
-      "labels": ["UPDATE-MAJOR"],
-      "semanticCommits": true
+      "labels": ["UPDATE-MAJOR"]
     },
     {
       "groupName": "Non-major deps",
       "packagePatterns": ["*"],
       "depTypeList": ["dependencies"],
       "updateTypes": ["minor", "patch"],
-      "labels": ["UPDATE-NON-MAJOR"],
-      "semanticCommits": true
+      "labels": ["UPDATE-NON-MAJOR"]
     }
   ]
 }
