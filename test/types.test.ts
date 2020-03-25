@@ -10,6 +10,9 @@ import * as jsonml from '..';
 const isFragYes: boolean = jsonml.isFragment(['', 'hi']);
 const isFragNo: boolean = jsonml.isFragment(['div', 'hi']);
 
+const isMarkupYes: boolean = jsonml.isMarkup(jsonml.raw('hello'));
+const isMarkupNo: boolean = jsonml.isMarkup(['div', 'hello']);
+
 const paraTag: string = jsonml.getTagName(['p', 'some text']);
 const fragTag: string = jsonml.getTagName(['', 'some fragment text']);
 

@@ -29,6 +29,8 @@ export type JSONMLNode = JSONMLElement | TextNode
 // Utils
 export function isFragment(jml: JSONMLElement): boolean;
 
+export function isMarkup(value: any): boolean;
+
 export function getTagName(jml: JSONMLElement): TagName;
 
 export function isElement(value: any): boolean;
