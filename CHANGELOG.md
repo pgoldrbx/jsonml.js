@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## Version 2.1.0 - 2020-03-25
+### Changed
+- (utils): Allow raw Markup instances to self-identify with isMarkup prop (#33)
+  The utils module no longer requires the html module and, as a result, no longer
+  requires jsdom.
+
 ## Version 2.0.0 - 2020-03-17
 ### Breaking
 - Update jsdom to v16, used in the DOM interface for using JsonML to interact with the DOM. ([#20])
