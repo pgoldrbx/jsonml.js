@@ -6,12 +6,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## Version 2.1.1 - 2020-04-13
 ### Fixed
-- (dom): Maintain empty spaces in text nodes when converting from HTML.
+- (dom): Maintain empty spaces in text nodes when converting from HTML. ([#34])
    Reverts an upstream change ([24f5ce7]) that modified McKamey's original logic.
    Fixes methods `fromHTML` and `fromHTMLText`.
 
 [24f5ce7]: https://github.com/benjycui/jsonml.js/commit/24f5ce7a0da83f445865a1188744c238111ac5ac
+[#34]: https://github.com/CondeNast/jsonml.js/pull/34
 
 ## Version 2.1.0 - 2020-03-25
 ### Changed
