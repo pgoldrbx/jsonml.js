@@ -6,6 +6,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## Version 2.2.0 - 2020-04-14
+### Fixed
+- (package): export interface namespaces in addition to merged methods ([#36])
+
+### Features
+- (xml): add XML methods ([#35])
+
+[#36]: https://github.com/CondeNast/jsonml.js/pull/36
+[#35]: https://github.com/CondeNast/jsonml.js/pull/35
+
 ## Version 2.1.1 - 2020-04-13
 ### Fixed
 - (dom): Maintain empty spaces in text nodes when converting from HTML. ([#34])
